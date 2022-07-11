@@ -1,7 +1,8 @@
 FROM node:16
 
-COPY package.json package-lock.json* ./
+WORKDIR /usr/app
+COPY package.json package-lock.json* /usr/app/
 RUN npm ci && npm cache clean --force
-COPY ./src ./src
+COPY ./src /usr/app/src
 
 CMD ["npm", "start"]
