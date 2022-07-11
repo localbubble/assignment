@@ -1,4 +1,4 @@
-FROM node:16.16
+FROM node:16.15
 
 ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
