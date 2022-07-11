@@ -36,3 +36,11 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build and Publish the Docker image
       run: docker build . --file Dockerfile --tag favorite-tree:${GITHUB_SHA::7}
+    
+    # As this project is missing a docker container registry, the following lines are commented out since they would break the pipeline.
+
+    #- run: docker login <docker-host>:<docker-port> --username <username> --password <password>
+
+    #- run: docker push <docker-host>:<docker-port>/favorite-tree:${GITHUB_SHA::7}
+
+    - run: docker rmi favorite-tree:${GITHUB_SHA::7} #remove docker image after docker push in order to save space from the build server.
