@@ -2,5 +2,5 @@ const app =  require( "./app");
 const port = process.env.PORT || 3000;
 
 app.listen(port, () =>
-  console.log('Favorite tree app is listening on port' + port),
+  console.log('Favorite tree app is listening on port ' + port),
 );
