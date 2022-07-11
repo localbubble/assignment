@@ -6,8 +6,6 @@ name: Node js
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   npm_build_and_test:
