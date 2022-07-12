@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: favorite-tree-deployment
+  labels:
+    app: favorite-tree
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: favorite-tree
+  template:
+    metadata:
+      labels:
+        app: favorite-tree
+    spec:
+      imagePullSecrets:
+      - name: docker-registry-secret-here # k8s secret mapping so Kubernetes cluster is able to talk to the docker registry and download the image
+      imagePullPolicy: IfNotPresent
+      containers:
+      - name: favorite-tree
+        image: docker-host:docker-port/favorite-tree:__SHORT_COMMIT_HASH__
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: 1
+          requests:
+            memory: 256Mi
+            cpu: 100m

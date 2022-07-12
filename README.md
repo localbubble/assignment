@@ -10,6 +10,9 @@ I have used Express for the application and Jest and SuperTest for testing the a
 to override the default port which is 3000 for this app, we could use `process.env.PORT` env variable.
 
 ## Pipeline Improvement Suggestions: 
+### Removal of hard coded port mapping in Dockerfile
+Pass the `process.env.PORT` environment variable to the Dockerfile as an argument during the pipeline.
+
 ### Refine Build
 The project is build twice in first two stages of the pipeline, we could reduce this to one by making use of the artifacts produced from the first stage, either by using caching or making sure the relevant artifacts created in the first stage are existing in the second stage.
 
@@ -18,3 +21,6 @@ As pipeline images, I've used ubuntu-latest for this project, however this is no
 
 ## Docker publish stage Abstraction:
 As this project is missing a docker image registry, relevant commands for pushing the docker image to a docker image repository are commented out from the pipeline file. Nevertheless, they should be sufficient to abstract my approach for publishing the docker image.
+
+## k8s deployment stage abstraction:
+The whole k8s deployment stage in the pipeline is commented out as this sample project is missing a kubernetes cluster.

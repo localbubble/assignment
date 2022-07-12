@@ -44,3 +44,24 @@ jobs:
     #- run: docker push <docker-host>:<docker-port>/favorite-tree:${GITHUB_SHA::7}
 
     - run: docker rmi favorite-tree:${GITHUB_SHA::7} #remove docker image after docker push in order to save space from the build server.
+
+#k8s_deploy:
+#  needs: docker_build_and_publish
+#  runs-on: ubuntu-latest
+
+#  steps:
+#  - uses: actions/checkout@v3
+#  - name: initialize k8s configuration
+#    run: #abstract step for initializing k8s connectivity to the target cluster. For the sake of this project, I've declared this as an abstract step. Normally I would have established k8s connectivity in a custom docker image which will be used for kubectl relevant steps, and in the pipeline I would only select the target cluster in order to have flexibility when deploying to different clusters like test, integration and production.
+
+#  - name: create namespace
+#    run: kubectl create namespace frontend 2>/dev/null #pipe any warnings in case the namespace already exists for the consecutive runs. Normally I would have put namespace declaraction in a separate place where other common k8s resources are declared, like common variables within a configmap.
+  
+#  - name: replace short commit hash placeholder before deployment
+#    run: sed -i 's/__SHORT_COMMIT_HASH__/${GITHUB_SHA::7}/' k8s/deployment.yml #command to replace __SHORT_COMMIT_HASH__ with ${GITHUB_SHA::7} from k8s/deployment.yml file 
+  
+#  - name: deploy k8s resources
+#    run: kubectl apply -n frontend -f k8s
+  
+#  - name: deployment-status
+#    run: kubectl rollout -n frontend status deployment/favorite-tree-deployment
