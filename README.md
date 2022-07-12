@@ -1,4 +1,4 @@
-# ecosia-assignment
+# interview assignment
 
 ## Setting up the project locally
 I have used Express for the application and Jest and SuperTest for testing the application:
