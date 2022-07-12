@@ -1,5 +1,6 @@
 FROM node:16.15
 
+RUN mkdir -p /usr/node/app/node_modules && chown -R node:node /home/node/app
 USER node
 
 ARG NODE_ENV=production
